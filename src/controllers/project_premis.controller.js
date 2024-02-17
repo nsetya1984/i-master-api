@@ -26,7 +26,7 @@ module.exports = {
  
     Object.entries(filters).forEach(([key, value]) => {  
       if(key==='id')
-        strCondition=strCondition+` ${key} = '${value}' AND `
+        strCondition=strCondition+" a."+` ${key} = '${value}' AND `
       else
         strCondition=strCondition+` ${key} LIKE '%${value}%' AND `
     })

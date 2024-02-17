@@ -11,7 +11,7 @@ const Project_premis = {
   },
   selectSome: (condition,range,cb) => {
     console.log("MODEL: project_premis->selectSome");
-    const queryString ="SELECT * FROM project_premis  WHERE 1 "+condition+" ORDER BY id DESC "+range+" ";
+    const queryString ="SELECT b.*, a.* FROM `project_premis`a LEFT JOIN project_category b ON a.`kategori_id`=b.id WHERE 1 "+condition+" ORDER BY a.id DESC "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
