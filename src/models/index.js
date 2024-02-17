@@ -21,8 +21,8 @@ module.exports = {
   Setting: require('./setting.model'),
 
   Itemoperation: require('./itemoperation.model'),
-  Itempendapatan: require('./Itempendapatan.model'),
-  Itembelanja: require('./Itembelanja.model'),
+  Itempendapatan: require('./itempendapatan.model'),
+  Itembelanja: require('./itembelanja.model'),
   Keuangan: require('./keuangan.model'),
   Operation: require('./operation.model'),
   Perbelanjaan: require('./perbelanjaan.model'),
