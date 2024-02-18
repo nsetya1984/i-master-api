@@ -69,6 +69,17 @@ const project_keuangan = {
   },
 
 
+  getTopFilter: (key,value, cb) => {
+    const queryString ="SELECT SUM(jualan) as total, b.id,b.name FROM `project_keuangan`  a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" GROUP BY  b.id,b.name";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+ 
+
+
   getTotalDaily: (cb) => {
     const queryString ="SELECT SUM(jualan) as total, tarikh FROM `project_keuangan`  GROUP BY tarikh";
     console.log(queryString)

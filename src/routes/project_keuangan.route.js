@@ -23,6 +23,9 @@ router
   .route('/kategori/:kategori_id/gettotaldaily')
   .get(project_keuanganController.getTotalDailyFilter)
 router
+  .route('/kategori/:kategori_id/gettop')
+  .get(project_keuanganController.getTopFilter)
+router
   .route('/:id')
   .get(project_keuanganController.getById)
 router

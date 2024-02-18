@@ -73,12 +73,27 @@ getTotalFilter: (req, res) => {
   },
   
 
- getTotalDaily: (req, res) => {
-    console.log("==gettotaldaily==");
+ gettopFilter: (req, res) => {
+    console.log("==gettopFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_keuangan.gettopFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+
+getTotalDaily: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
     db.Project_keuangan.getTotalDaily(data => {
       res.json(data)
     })
   },
+  
 
 getTotalDailyFilter: (req, res) => {
     console.log("==getTotalFilter==");
@@ -89,9 +104,20 @@ getTotalDailyFilter: (req, res) => {
       res.json(data)
     })
   },
+
+  getTopFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_keuangan.getTopFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+
   
-
-
+  
   createNew: (req, res) => {
     db.Project_keuangan.insertOne(req.body.vals, result => {
       res.json({ id: result.insertId })
