@@ -7,12 +7,7 @@ router
 router
   .route('/')
   .post(project_premisController.create)
-router
-  .route('/login')
-  .post(project_premisController.login)
-router
-  .route('/:id')
-  .get(project_premisController.getById)
+
 router
   .route('/:id')
   .put(project_premisController.updateById)
@@ -22,5 +17,18 @@ router
 router
   .route('/:id')
   .delete(project_premisController.deleteById)
+router
+  .route('/gettotal')
+  .get(project_premisController.getTotal)
+
+router
+  .route('/gettotalbycategori')
+  .get(project_premisController.getTotalByCategori)
+router
+  .route('/kategori/:kategori_id/gettotal')
+  .get(project_premisController.getTotalFilter)
+router
+  .route('/:id')
+  .get(project_premisController.getById)
 module.exports = router
 

@@ -27,6 +27,34 @@ const Project_premis = {
       cb(result[0]);
     });
   },
+
+
+  getTotal: (cb) => {
+    const queryString ="SELECT count(*) as total FROM project_premis";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+   getTotalFilter: (key,value,cb) => {
+    const queryString ="SELECT count(*) as total FROM project_premis WHERE "+key+"="+value;
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+  getTotalByCategori: (cb) => {
+    const queryString ="SELECT count(*) as total, b.category_name, a.kategori_id FROM `project_premis`a LEFT JOIN project_category b ON a.`kategori_id`=b.id WHERE 1 GROUP BY kategori_id,category_name";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
  
   deleteOne: (id, cb) => {
     const queryString = "DELETE FROM project_premis WHERE id=?;";

@@ -49,6 +49,50 @@ const project_keuangan = {
 
 
 
+  getTotal: (cb) => {
+    const queryString ="SELECT SUM(jualan) as total FROM project_keuangan";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+
+  getTotalFilter: (key,value,cb) => {
+    const queryString ="SELECT SUM(jualan) as total FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" ";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+
+  getTotalDaily: (cb) => {
+    const queryString ="SELECT SUM(jualan) as total, tarikh FROM `project_keuangan`  GROUP BY tarikh";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+ 
+
+
+  getTotalDailyFilter: (key,value,cb) => {
+    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" GROUP BY tarikh";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
+ 
+
+
+
   insertOne: (vals, cb) => {
     console.log("MODEL: project_keuangan->insertOne");
     console.log(vals);

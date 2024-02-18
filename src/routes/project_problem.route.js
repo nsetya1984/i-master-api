@@ -14,6 +14,19 @@ router
   .route('/login')
   .post(project_problemsController.login)
 router
+  .route('/gettotal')
+  .get(project_problemsController.getTotal)
+router
+  .route('/kategori/:kategori_id/gettotal')
+  .get(project_problemsController.getTotalFilter)
+router
+  .route('/gettotalbycategori')
+  .get(project_problemsController.getTotalByCategori)
+router
+  .route('/kategori/:kategori_id/gettotalbycategori')
+  .get(project_problemsController.getTotalByCategoriFilter)
+
+router
   .route('/:id')
   .get(project_problemsController.getById)
 router

@@ -107,6 +107,35 @@ module.exports = {
     })
   },
 
+getTotalFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+
+    db.Project_problem.getTotalFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+  
+ getTotalByCategori: (req, res) => {
+    console.log("==getTotalByCategori==");
+    db.Project_problem.getTotalByCategori(data => {
+      res.json(data)
+    })
+  },
+  getTotalByCategoriFilter: (req, res) => {
+    console.log("==getTotalByCategoriFilter==");
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_problem.getTotalByCategoriFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+
 
   createNew: (req, res) => {
     db.Project_problem.insertOne(req.body.vals, result => {

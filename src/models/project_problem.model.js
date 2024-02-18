@@ -38,6 +38,47 @@ selectJoin: (condition,range,cb) => {
     });
   },
  
+
+  getTotal: (cb) => {
+    const queryString ="SELECT count(*) as total FROM project_problem";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+   getTotalFilter: (key,value,cb) => {
+    const queryString ="SELECT count(*) as total FROM project_problem a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value;
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+
+
+  getTotalByCategori: (cb) => {
+    const queryString ="SELECT count(*) as total, b.cat_name, a.problem_cat_id FROM `project_problem`a LEFT JOIN problem_category b ON a.`problem_cat_id`=b.id WHERE 1 GROUP BY problem_cat_id,cat_name";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
+   getTotalByCategoriFilter: (key,value,cb) => {
+    const queryString ="SELECT count(*) as total, b.cat_name, a.problem_cat_id FROM `project_problem`a LEFT JOIN problem_category b ON a.`problem_cat_id`=b.id LEFT JOIN project_premis c ON a.`premis_id`=c.id  WHERE c."+key+"="+value+" GROUP BY problem_cat_id,cat_name";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+ 
+
+ 
   deleteOne: (id, cb) => {
     const queryString = "DELETE FROM project_problem WHERE id=?;";
     connection.execute(queryString, [id], (err, result) => {

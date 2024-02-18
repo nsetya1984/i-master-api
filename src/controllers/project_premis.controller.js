@@ -48,7 +48,6 @@ module.exports = {
   
     }
 
-
     console.log(condition);
     console.log(limit);
     
@@ -59,11 +58,29 @@ module.exports = {
   },
   getTotal: (req, res) => {
     console.log("==getTotal==");
+    console.log(req.params);
     db.Project_premis.getTotal(data => {
       res.json(data)
     })
   },
 
+  getTotalFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+
+    db.Project_premis.getTotalFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+ getTotalByCategori: (req, res) => {
+    console.log("==getTotalByCategori==");
+    db.Project_premis.getTotalByCategori(data => {
+      res.json(data)
+    })
+  },
 
   createNew: (req, res) => {
     db.Project_premis.insertOne(req.body.vals, result => {

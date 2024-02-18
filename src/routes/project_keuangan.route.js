@@ -11,6 +11,18 @@ router
   .route('/login')
   .post(project_keuanganController.login)
 router
+  .route('/gettotal')
+  .get(project_keuanganController.getTotal)
+router
+  .route('/kategori/:kategori_id/gettotal')
+  .get(project_keuanganController.getTotalFilter)
+router
+  .route('/gettotaldaily')
+  .get(project_keuanganController.getTotalDaily)
+router
+  .route('/kategori/:kategori_id/gettotaldaily')
+  .get(project_keuanganController.getTotalDailyFilter)
+router
   .route('/:id')
   .get(project_keuanganController.getById)
 router

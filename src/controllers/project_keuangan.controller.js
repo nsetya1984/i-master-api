@@ -61,6 +61,36 @@ module.exports = {
     })
   },
 
+getTotalFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+
+    db.Project_keuangan.getTotalFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+  
+
+ getTotalDaily: (req, res) => {
+    console.log("==gettotaldaily==");
+    db.Project_keuangan.getTotalDaily(data => {
+      res.json(data)
+    })
+  },
+
+getTotalDailyFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_keuangan.getTotalDailyFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+  
+
 
   createNew: (req, res) => {
     db.Project_keuangan.insertOne(req.body.vals, result => {
