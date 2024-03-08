@@ -17,24 +17,11 @@ const project_hutangRoute = require('./routes/project_hutang.route');
 const Project_hutang_problemRoute = require('./routes/project_hutang_problem.route');
 const project_hutang_keuanganRoute = require('./routes/project_hutang_keuangan.route');
 
-
 const problem_categoryRoute = require('./routes/problem_category.route');
 const project_keuanganRoute = require('./routes/project_keuangan.route');
-
 const userroleRoute = require('./routes/userrole.route');
 
 //warteg 
-const OutletRoute = require('./routes/outlet.route');
-const PengelolaRoute = require('./routes/pengelola.route');
-const InvestorRoute = require('./routes/investor.route');
-const PeriodeRoute = require('./routes/periode.route');
-const ItemOperationRoute = require('./routes/itemoperation.route');
-const ItemPendapatanRoute = require('./routes/itempendapatan.route');
-const ItemBelanjaRoute = require('./routes/itembelanja.route');
-const KeuanganRoute = require('./routes/keuangan.route');
-const OperationRoute = require('./routes/operation.route');
-const PerbelanjaanRoute = require('./routes/perbelanjaan.route');
-const SettingRoute = require('./routes/setting.route');
 
 
 const { httpLogStream } = require('./utils/logger');
@@ -60,28 +47,6 @@ app.use('/api/project_hutang_keuangan', project_hutang_keuanganRoute);
 
 
 app.use('/api/userrole', userroleRoute);
-
-app.use('/api/tariff', tariffRoute);
-app.use('/api/driver', driverRoute);
-app.use('/api/reservation', reservationRoute);
-
-
-//warteg
-app.use('/api/outlet', OutletRoute);
-app.use('/api/pengelola', PengelolaRoute);
-app.use('/api/investor', InvestorRoute);
-app.use('/api/periode', PeriodeRoute);
-
-app.use('/api/itemoperation', ItemOperationRoute);
-app.use('/api/itempendapatan', ItemPendapatanRoute);
-app.use('/api/itembelanja', ItemBelanjaRoute);
-
-app.use('/api/keuangan', KeuanganRoute);
-
-app.use('/api/keuangan/operation/outlet/', OperationRoute);
-app.use('/api/perbelanjaan', PerbelanjaanRoute);
-app.use('/api/operation', OperationRoute);
-
 app.use('/api/setting', SettingRoute);
 
 
