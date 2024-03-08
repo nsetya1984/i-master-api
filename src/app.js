@@ -13,6 +13,11 @@ const zonRoute = require('./routes/zon.route');
 const project_categoryRoute = require('./routes/project_category.route');
 const project_premisRoute = require('./routes/project_premis.route');
 const project_problemRoute = require('./routes/project_problem.route');
+const project_hutangRoute = require('./routes/project_hutang.route');
+const Project_hutang_problemRoute = require('./routes/project_hutang_problem.route');
+const project_hutang_keuanganRoute = require('./routes/project_hutang_keuangan.route');
+
+
 const problem_categoryRoute = require('./routes/problem_category.route');
 const project_keuanganRoute = require('./routes/project_keuangan.route');
 
@@ -46,8 +51,13 @@ app.use('/api/zons', zonRoute);
 app.use('/api/project_category', project_categoryRoute);
 app.use('/api/project_premis', project_premisRoute);
 app.use('/api/project_problem', project_problemRoute);
+app.use('/api/project_hutang', project_hutangRoute);
+app.use('/api/Project_hutang_problem', Project_hutang_problemRoute);
+
 app.use('/api/problem_category', problem_categoryRoute);
 app.use('/api/project_keuangan', project_keuanganRoute);
+app.use('/api/project_hutang_keuangan', project_hutang_keuanganRoute);
+
 
 app.use('/api/userrole', userroleRoute);
 
