@@ -47,7 +47,6 @@ app.use('/api/project_hutang_keuangan', project_hutang_keuanganRoute);
 
 
 app.use('/api/userrole', userroleRoute);
-app.use('/api/setting', SettingRoute);
 
 
 app.get('/', (req, res) => {
