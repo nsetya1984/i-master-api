@@ -12,7 +12,7 @@ module.exports = {
   Project_keuangan: require('./project_keuangan.model'),
   Project_hutang: require('./project_hutang.model'),
   Project_hutang_problem: require('./project_hutang_problem.model'),
-  Project_hutang_keuangan: require('./Project_hutang_keuangan.model'),
+  Project_hutang_keuangan: require('./project_hutang_keuangan.model'),
   Userrole: require('./userrole.model'),
   Reservation: require('./reservation.model'),
 
