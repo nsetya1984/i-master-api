@@ -70,8 +70,6 @@ getJumlah: (cb) => {
 
 
 
-
-
    getTotalByStatus: (cb) => {
     const queryString ='SELECT name, id, IF(`progress` < 50, "< 50",IF(`progress` > 50 AND `progress` < 100,"> 50", IF(`progress` = 100, "100",""))) as status FROM `project_hutang` WHERE 1 ';
     console.log(queryString)

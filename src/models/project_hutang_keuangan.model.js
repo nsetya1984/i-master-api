@@ -81,7 +81,7 @@ const Project_hutang_keuangan = {
 
 
   getTotalDaily: (cb) => {
-    const queryString ="SELECT SUM(pembayaran) as total, tarikh, name FROM `project_hutang_keuangan`  a LEFT JOIN project_hutang b ON a.project_hutang_id=b.id GROUP BY tarikh";
+    const queryString ="SELECT SUM(pembayaran) as total, tarikh, name FROM `project_hutang_keuangan`  a LEFT JOIN project_hutang b ON a.project_hutang_id=b.id GROUP BY tarikh,name";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
