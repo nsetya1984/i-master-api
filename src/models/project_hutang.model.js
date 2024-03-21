@@ -110,6 +110,7 @@ getJumlah: (cb) => {
   insertOne: (vals, cb) => {
     console.log("MODEL: project_hutang->insertOne");
     console.log(vals);
+    vals.tarikh_hutang = formatDate(vals.tarikh_hutang)
     const queryString =
     "INSERT INTO project_hutang SET ?";
     console.log(queryString);
