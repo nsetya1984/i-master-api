@@ -3,7 +3,7 @@ const connection = require('../config/db.config');
 const project_keuangan = {
   selectAll: cb => {
     const queryString =
-      "SELECT * FROM project_keuangan WHERE 1 LIMIT 50";
+      "SELECT * FROM project_keuangan WHERE 1 LIMIT 500";
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
@@ -81,7 +81,7 @@ const project_keuangan = {
 
 
   getTotalDaily: (cb) => {
-    const queryString ="SELECT SUM(jualan) as total, tarikh FROM `project_keuangan`  GROUP BY tarikh";
+    const queryString ="SELECT SUM(jualan) as total, tarikh FROM `project_keuangan`  GROUP BY tarikh ORDER BY tarikh DESC";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -92,7 +92,7 @@ const project_keuangan = {
 
 
   getTotalDailyFilter: (key,value,cb) => {
-    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" GROUP BY tarikh";
+    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" GROUP BY tarikh ORDER BY tarikh DESC";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
