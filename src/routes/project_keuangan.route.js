@@ -17,6 +17,9 @@ router
   .route('/kategori/:kategori_id/gettotal')
   .get(project_keuanganController.getTotalFilter)
 router
+  .route('/premis/:premis_id/gettotal')
+  .get(project_keuanganController.getTotalFilter)
+router
   .route('/gettotaldaily')
   .get(project_keuanganController.getTotalDaily)
 router
