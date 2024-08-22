@@ -106,14 +106,8 @@ const project_keuangan = {
     });
   },
 
-<<<<<<< HEAD
   getZonPremisTotalMonthly: (id_zon, cb) => {
     const queryString ="SELECT SUM(jualan) as total, premis_id FROM `project_keuangan`  WHERE id_zon="+id_zon+" AND MONTH(tarikh)=MONTH(NOW())  GROUP BY premis_id ";
-=======
-
-  getTotalDailyFilter: (key,value,cb) => {
-    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan  WHERE "+key+"="+value+" GROUP BY tarikh ORDER BY tarikh DESC";
->>>>>>> 6582738 (Bismillah)
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
