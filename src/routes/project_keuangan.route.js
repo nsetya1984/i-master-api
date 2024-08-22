@@ -23,7 +23,19 @@ router
   .route('/gettotaldaily')
   .get(project_keuanganController.getTotalDaily)
 router
+  .route('/getzontotalthismonth/zon/:id_zon')
+  .get(project_keuanganController.getZonTotalThisMonth)
+router
+  .route('/getzonpremistotalmonthly/zon/:id_zon')
+  .get(project_keuanganController.getZonPremisTotalMonthly)
+router
+  .route('/gettotaldaily/zon/:id_zon')
+  .get(project_keuanganController.getZonTotalDaily)
+router
   .route('/kategori/:kategori_id/gettotaldaily')
+  .get(project_keuanganController.getTotalDailyFilter)
+router
+  .route('/premis/:premis_id/gettotaldaily')
   .get(project_keuanganController.getTotalDailyFilter)
 router
   .route('/kategori/:kategori_id/gettop')

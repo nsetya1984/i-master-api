@@ -60,7 +60,7 @@ const project_keuangan = {
 
 
   getTotalFilter: (key,value,cb) => {
-    const queryString ="SELECT SUM(jualan) as total FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" ";
+    const queryString ="SELECT SUM(jualan) as total FROM project_keuangan  WHERE "+key+"="+value+" ";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -89,10 +89,25 @@ const project_keuangan = {
     });
   },
  
+ getZonTotalDaily: (id_zon, cb) => {
+    const queryString ="SELECT SUM(jualan) as total,tarikh FROM `project_keuangan`  WHERE id_zon="+id_zon+" AND MONTH(tarikh)=MONTH(NOW()) GROUP BY tarikh ORDER BY tarikh DESC";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+  getZonTotalThisMonth: (id_zon, cb) => {
+    const queryString ="SELECT SUM(jualan) as total FROM `project_keuangan`  WHERE id_zon="+id_zon+" AND MONTH(tarikh)=MONTH(NOW())";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
 
-
-  getTotalDailyFilter: (key,value,cb) => {
-    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan a LEFT JOIN project_premis b ON a.premis_id=b.id WHERE b."+key+"="+value+" GROUP BY tarikh ORDER BY tarikh DESC";
+  getZonPremisTotalMonthly: (id_zon, cb) => {
+    const queryString ="SELECT SUM(jualan) as total, premis_id FROM `project_keuangan`  WHERE id_zon="+id_zon+" AND MONTH(tarikh)=MONTH(NOW())  GROUP BY premis_id ";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -100,9 +115,16 @@ const project_keuangan = {
     });
   },
 
+  
  
-
-
+  getTotalDailyFilter: (key,value,cb) => {
+    const queryString ="SELECT SUM(jualan) as total,tarikh FROM project_keuangan  WHERE "+key+"="+value+" GROUP BY tarikh ORDER BY tarikh DESC";
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result);
+    });
+  },
 
   insertOne: (vals, cb) => {
     console.log("MODEL: project_keuangan->insertOne");

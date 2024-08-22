@@ -93,8 +93,40 @@ getTotalDaily: (req, res) => {
       res.json(data)
     })
   },
-  
 
+
+getZonTotalThisMonth: (req, res) => {
+    console.log("==getZonTotalThisMonth==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+   
+    db.Project_keuangan.getZonTotalThisMonth(req.params.id_zon,data => {
+      res.json(data)
+    }) 
+  },
+
+getZonTotalDaily: (req, res) => {
+    console.log("==getZonTotalDaily===========");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_keuangan.getZonTotalDaily(req.params.id_zon,data => {
+      res.json(data)
+    }) 
+  },
+
+ getZonPremisTotalMonthly: (req, res) => {
+    console.log("==getZonPremisTotalMonthly==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+    db.Project_keuangan.getZonPremisTotalMonthly(req.params.id_zon,data => {
+      res.json(data)
+    }) 
+  },
+  
+  
 getTotalDailyFilter: (req, res) => {
     console.log("==getTotalFilter==");
     console.log(req.params);
