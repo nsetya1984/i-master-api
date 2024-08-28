@@ -1,17 +1,17 @@
 const connection = require('../config/db.config');
 
-const Project_premis = {
+const master_premis = {
   selectAll: cb => {
     const queryString =
-      "SELECT * FROM project_premis WHERE 1 LIMIT 50";
+      "SELECT * FROM master_data_premis WHERE 1 LIMIT 50";
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
     });
   },
   selectSome: (condition,range,cb) => {
-    console.log("MODEL: project_premis->selectSome");
-    const queryString ="SELECT b.*, a.* FROM `project_premis`a LEFT JOIN project_category b ON a.`kategori_id`=b.id WHERE 1 "+condition+" ORDER BY a.id DESC "+range+" ";
+    console.log("MODEL: master_data_premis->selectSome");
+    const queryString ="SELECT b.*,c.*,a.* FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id LEFT JOIN zons c  ON a.id_zon=c.id_zon WHERE 1 "+condition+" ORDER BY a.id DESC "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -21,7 +21,7 @@ const Project_premis = {
 
   selectOne: (id, cb) => {
     const queryString =
-      "SELECT * FROM project_premis WHERE id=?;";
+      "SELECT * FROM master_data_premis WHERE id=?;";
     connection.query(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result[0]);
@@ -30,7 +30,7 @@ const Project_premis = {
 
 
   getTotal: (cb) => {
-    const queryString ="SELECT count(*) as total FROM project_premis";
+    const queryString ="SELECT count(*) as total FROM master_data_premis";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -39,7 +39,7 @@ const Project_premis = {
   },
 
    getTotalFilter: (key,value,cb) => {
-    const queryString ="SELECT count(*) as total FROM project_premis WHERE "+key+"="+value;
+    const queryString ="SELECT count(*) as total FROM master_premis WHERE "+key+"="+value;
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -48,7 +48,7 @@ const Project_premis = {
   },
 
   getTotalByCategori: (cb) => {
-    const queryString ="SELECT count(*) as total, b.category_name, a.kategori_id FROM `project_premis`a LEFT JOIN project_category b ON a.`kategori_id`=b.id WHERE 1 GROUP BY kategori_id,category_name";
+    const queryString ="SELECT count(*) as total, b.category_name, a.id_category FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id WHERE 1 GROUP BY id_category,category_name";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -57,7 +57,7 @@ const Project_premis = {
   },
  
   deleteOne: (id, cb) => {
-    const queryString = "DELETE FROM project_premis WHERE id=?;";
+    const queryString = "DELETE FROM master_data_premis WHERE id=?;";
     connection.execute(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result);
@@ -65,8 +65,8 @@ const Project_premis = {
   },
 
  deleteSome: (condition,cb) => {
-    console.log("MODEL: project_premis->deleteSome");
-    const queryString ="DELETE FROM project_premis  "+condition+" ";
+    console.log("MODEL: master_data_premis->deleteSome");
+    const queryString ="DELETE FROM master_data_premis  "+condition+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -75,10 +75,10 @@ const Project_premis = {
   },
 
   insertOne: (vals, cb) => {
-    console.log("MODEL: project_premis->insertOne");
+    console.log("MODEL: master_data_premis->insertOne");
     console.log(vals);
     const queryString =
-    "INSERT INTO project_premis SET ?";
+    "INSERT INTO master_data_premis SET ?";
     console.log(queryString);
     connection.query(queryString, vals,(err, results) => {
       if (err) throw err;
@@ -87,10 +87,10 @@ const Project_premis = {
   },
   
    updateOne: (vals, id, cb) => {
-    console.log("MODERL project_premis updateOne");
+    console.log("MODERL master_data_premis updateOne");
     console.log(vals);
     const queryString =
-      "UPDATE project_premis SET ? WHERE id=?";
+      "UPDATE master_data_premis SET ? WHERE id=?";
     console.log(queryString);
 
     console.log("Result :");
@@ -102,4 +102,4 @@ const Project_premis = {
   }
 };
 
-module.exports = Project_premis;
+module.exports = master_premis;

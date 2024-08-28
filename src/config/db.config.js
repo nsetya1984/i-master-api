@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
         host: "localhost",
         user: "root",
         password: "",
-        database: 'i-project'
+        database: 'gisbh_master'
     });
 
 
@@ -16,9 +16,9 @@ if(os.hostname() !== "Nanangs-MacBook-Pro.local")
     console.log("SERVER");
     connection = mysql.createConnection({
         host: "localhost",
-        user: "premis",
+        user: "adminmaster",
         password: "DTCMtolong313",
-        database: 'premis'
+        database: 'master'
     });
 
 }

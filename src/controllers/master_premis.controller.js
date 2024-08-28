@@ -1,16 +1,17 @@
 const db = require('../models/index.js')
 module.exports = {
+
   create: (req, res) => {
-    console.log("=Project Hutang =create==");
+    console.log("=Tariff =create==");
     console.log(req.body);
-    db.Project_hutang.insertOne(req.body, result => {
+    db.Master_premis.insertOne(req.body, result => {
       res.json({ id: result.insertId })
     })
 
   },
 
   getAll: (req, res) => {
-    db.Project_hutang.selectAll(data => {
+    db.Master_premis.selectAll(data => {
       res.json(data)
     })
   },
@@ -24,7 +25,7 @@ module.exports = {
     var limit=" LIMIT 100";
  
     Object.entries(filters).forEach(([key, value]) => {  
-      if(key==='id')
+      if(key==='id_zon')
         strCondition=strCondition+" a."+` ${key} = '${value}' AND `
       else
         strCondition=strCondition+` ${key} LIKE '%${value}%' AND `
@@ -50,7 +51,7 @@ module.exports = {
     console.log(condition);
     console.log(limit);
     
-    db.Project_hutang.selectSome(condition,limit, data => {
+    db.Master_premis.selectSome(condition,limit, data => {
       res.json(data)
     });
 
@@ -58,15 +59,7 @@ module.exports = {
   getTotal: (req, res) => {
     console.log("==getTotal==");
     console.log(req.params);
-    db.Project_hutang.getTotal(data => {
-      res.json(data)
-    })
-  },
-
-  getJumlah: (req, res) => {
-    console.log("==getJumlah==");
-    console.log(req.params);
-    db.Project_hutang.getJumlah(data => {
+    db.Master_premis.getTotal(data => {
       res.json(data)
     })
   },
@@ -77,45 +70,51 @@ module.exports = {
     let keys = Object.keys(req.params);
     let values = Object.values(req.params);
 
-    db.Project_hutang.getTotalFilter(keys[0],values[0],data => {
+    db.Master_premis.getTotalFilter(keys[0],values[0],data => {
       res.json(data)
     })
   },
 
  getTotalByCategori: (req, res) => {
     console.log("==getTotalByCategori==");
-    db.Project_hutang.getTotalByCategori(data => {
+    db.Master_premis.getTotalByCategori(data => {
       res.json(data)
     })
   },
-   getTotalByPj: (req, res) => {
-    console.log("==getTotalByPj==");
-    db.Project_hutang.getTotalByPj(data => {
-      res.json(data)
-    })
-  },
-
-  
 
   createNew: (req, res) => {
-    db.Project_hutang.insertOne(req.body.vals, result => {
+    db.Master_premis.insertOne(req.body.vals, result => {
       res.json({ id: result.insertId })
     })
   },
   login: (req, res) => {
     console.log("req.body",req.body);
-    db.Project_hutang.login(req.body, data => {
+    db.Master_premis.login(req.body, data => {
       res.json(data)
     });
   },
+
+  
+
+  getPremisByZonId: (req, res) => {
+    console.log("==getPremisByZonId==");
+    console.log(req.params);
+    var limit=" LIMIT 100";
+    var condition=" AND a.id_zon= "+ req.params.id_zon+ "";
+    db.Master_premis.selectSome(condition,limit, data => {
+      res.json(data)
+    });
+
+  },
+
   getById: (req, res) => {
     console.log("==getById==");
-    db.Project_hutang.selectOne(req.params.id, data => {
+    db.Master_premis.selectOne(req.params.id, data => {
       res.json(data)
     })
   },
   updateById: (req, res) => {
-    db.Project_hutang.updateOne(req.body, req.params.id, result => {
+    db.Master_premis.updateOne(req.body, req.params.id, result => {
     
     })
   },
@@ -124,6 +123,7 @@ module.exports = {
     console.log(req.query);
     var filters=JSON.parse(req.query.filter);
    
+    
     var condition=" WHERE id IN (";
     var strCondition="";
     Object.entries(filters).forEach(([key, value]) => {  
@@ -132,12 +132,12 @@ module.exports = {
     condition = condition+strCondition.substring(0, strCondition.length - 2)+")";
     console.log(condition);
 
-    db.Project_hutang.deleteSome(condition, data => {
+    db.Master_premis.deleteSome(condition, data => {
       res.json(data)
     })
   },
   deleteById: (req, res) => {
-    db.Project_hutang.deleteOne(req.params.id, data => {
+    db.Master_premis.deleteOne(req.params.id, data => {
       res.json(data)
     })
   }
