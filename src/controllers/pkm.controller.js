@@ -2,16 +2,16 @@ const db = require('../models/index.js')
 module.exports = {
 
   create: (req, res) => {
-    console.log("=RKP ENT =create==");
+    console.log("=Tariff =create==");
     console.log(req.body);
-    db.Rkp_ent.insertOne(req.body, result => {
+    db.Pkm.insertOne(req.body, result => {
       res.json({ id: result.insertId })
     })
 
   },
 
   getAll: (req, res) => {
-    db.Rkp_ent.selectAll(data => {
+    db.Pkm.selectAll(data => {
       res.json(data)
     })
   },
@@ -51,7 +51,7 @@ module.exports = {
     console.log(condition);
     console.log(limit);
     
-    db.Rkp_ent.selectSome(condition,limit, data => {
+    db.Pkm.selectSome(condition,limit, data => {
       res.json(data)
     });
 
@@ -59,31 +59,62 @@ module.exports = {
   getTotal: (req, res) => {
     console.log("==getTotal==");
     console.log(req.params);
-    db.Rkp_ent.getTotal(data => {
+    db.Pkm.getTotal(data => {
+      res.json(data)
+    })
+  },
+
+  getTotalFilter: (req, res) => {
+    console.log("==getTotalFilter==");
+    console.log(req.params);
+    let keys = Object.keys(req.params);
+    let values = Object.values(req.params);
+
+    db.Pkm.getTotalFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+ getTotalByCategori: (req, res) => {
+    console.log("==getTotalByCategori==");
+    db.Pkm.getTotalByCategori(data => {
       res.json(data)
     })
   },
 
   createNew: (req, res) => {
-    db.Rkp_ent.insertOne(req.body.vals, result => {
+    db.Pkm.insertOne(req.body.vals, result => {
       res.json({ id: result.insertId })
     })
   },
   login: (req, res) => {
     console.log("req.body",req.body);
-    db.Rkp_ent.login(req.body, data => {
+    db.Pkm.login(req.body, data => {
       res.json(data)
     });
   },
 
+  
+
+  getPremisByZonId: (req, res) => {
+    console.log("==getPremisByZonId==");
+    console.log(req.params);
+    var limit=" LIMIT 100";
+    var condition=" AND a.id_zon= "+ req.params.id_zon+ "";
+    db.Pkm.selectSome(condition,limit, data => {
+      res.json(data)
+    });
+
+  },
+
   getById: (req, res) => {
     console.log("==getById==");
-    db.Rkp_ent.selectOne(req.params.id, data => {
+    db.Pkm.selectOne(req.params.id, data => {
       res.json(data)
     })
   },
   updateById: (req, res) => {
-    db.Rkp_ent.updateOne(req.body, req.params.id, result => {
+    db.Pkm.updateOne(req.body, req.params.id, result => {
     
     })
   },
@@ -101,12 +132,12 @@ module.exports = {
     condition = condition+strCondition.substring(0, strCondition.length - 2)+")";
     console.log(condition);
 
-    db.Rkp_ent.deleteSome(condition, data => {
+    db.Pkm.deleteSome(condition, data => {
       res.json(data)
     })
   },
   deleteById: (req, res) => {
-    db.Rkp_ent.deleteOne(req.params.id, data => {
+    db.Pkm.deleteOne(req.params.id, data => {
       res.json(data)
     })
   }

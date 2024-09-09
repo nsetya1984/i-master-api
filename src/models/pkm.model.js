@@ -1,6 +1,6 @@
 const connection = require('../config/db.config');
 
-const master_premis = {
+const Pkm = {
   selectAll: cb => {
     const queryString =
       "SELECT * FROM master_data_premis WHERE 1 LIMIT 50";
@@ -10,8 +10,8 @@ const master_premis = {
     });
   },
   selectSome: (condition,range,cb) => {
-    console.log("MODEL: master_data_premis->selectSome");
-    const queryString ="SELECT b.*,a.*,c.zon_name FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id LEFT JOIN zons c  ON a.id_zon=c.id_zon WHERE jenis_premis=0  "+condition+" ORDER BY a.id DESC "+range+" ";
+    console.log("MODEL: PKM master_data_premis->selectSome");
+    const queryString ="SELECT b.*,a.*,c.zon_name FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id LEFT JOIN zons c  ON a.id_zon=c.id_zon WHERE jenis_premis=2  "+condition+" ORDER BY a.id DESC "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -21,7 +21,7 @@ const master_premis = {
 
   selectOne: (id, cb) => {
     const queryString =
-      "SELECT * FROM master_data_premis WHERE id=?;";
+      "SELECT b.*,a.*,c.zon_name FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id LEFT JOIN zons c  ON a.id_zon=c.id_zon WHERE a.id=?;";
     connection.query(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result[0]);
@@ -76,6 +76,7 @@ const master_premis = {
 
   insertOne: (vals, cb) => {
     console.log("MODEL: master_data_premis->insertOne");
+    vals.jenis_premis =2;
     console.log(vals);
     const queryString =
     "INSERT INTO master_data_premis SET ?";
@@ -88,7 +89,6 @@ const master_premis = {
   
    updateOne: (vals, id, cb) => {
     console.log("MODERL master_data_premis updateOne");
-    console.log(vals);
     const queryString =
       "UPDATE master_data_premis SET ? WHERE id=?";
     console.log(queryString);
@@ -102,4 +102,4 @@ const master_premis = {
   }
 };
 
-module.exports = master_premis;
+module.exports = Pkm;

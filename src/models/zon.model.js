@@ -1,17 +1,17 @@
 const connection = require('../config/db.config');
 
-const rkp_ent = {
+const Zon = {
   selectAll: cb => {
     const queryString =
-      "SELECT * FROM rkp_ent WHERE 1 LIMIT 50";
+      "SELECT * FROM zons WHERE 1 LIMIT 100";
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
     });
   },
   selectSome: (condition,range,cb) => {
-    console.log("MODEL: rkp_ent->selectSome");
-    const queryString ="SELECT * , Id as id FROM `rkp_ent` WHERE 1 "+condition+" ORDER BY id DESC "+range+" ";
+    console.log("MODEL: zons->selectSome");
+    const queryString ="SELECT * FROM `zons` WHERE 1  "+condition+" ORDER BY id DESC "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -21,7 +21,7 @@ const rkp_ent = {
 
   selectOne: (id, cb) => {
     const queryString =
-      "SELECT * FROM rkp_ent WHERE Id=?;";
+      "SELECT * FROM zons WHERE id=?;";
     connection.query(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result[0]);
@@ -30,7 +30,7 @@ const rkp_ent = {
 
 
   getTotal: (cb) => {
-    const queryString ="SELECT count(*) as total FROM rkp_ent";
+    const queryString ="SELECT count(*) as total FROM zons";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -39,7 +39,7 @@ const rkp_ent = {
   },
 
   deleteOne: (id, cb) => {
-    const queryString = "DELETE FROM rkp_ent WHERE id=?;";
+    const queryString = "DELETE FROM zons WHERE id=?;";
     connection.execute(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result);
@@ -47,8 +47,8 @@ const rkp_ent = {
   },
 
  deleteSome: (condition,cb) => {
-    console.log("MODEL: rkp_ent->deleteSome");
-    const queryString ="DELETE FROM rkp_ent  "+condition+" ";
+    console.log("MODEL: zons->deleteSome");
+    const queryString ="DELETE FROM zons  "+condition+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -57,10 +57,10 @@ const rkp_ent = {
   },
 
   insertOne: (vals, cb) => {
-    console.log("MODEL: rkp_ent->insertOne");
+    console.log("MODEL: zons->insertOne");
     console.log(vals);
     const queryString =
-    "INSERT INTO rkp_ent SET ?";
+    "INSERT INTO zons SET ?";
     console.log(queryString);
     connection.query(queryString, vals,(err, results) => {
       if (err) throw err;
@@ -69,10 +69,10 @@ const rkp_ent = {
   },
   
    updateOne: (vals, id, cb) => {
-    console.log("MODERL rkp_ent updateOne");
+    console.log("MODERL zons updateOne");
     console.log(vals);
     const queryString =
-      "UPDATE rkp_ent SET ? WHERE id=?";
+      "UPDATE zons SET ? WHERE id=?";
     console.log(queryString);
 
     console.log("Result :");
@@ -84,4 +84,4 @@ const rkp_ent = {
   }
 };
 
-module.exports = rkp_ent;
+module.exports = Zon;

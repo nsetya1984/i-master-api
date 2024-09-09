@@ -6,6 +6,11 @@ const cors = require('cors');
 //const userRoute = require('./routes/user.route');
 const master_premisRoute = require('./routes/master_premis.route');
 const rkp_entRoute = require('./routes/rkp_ent.route');
+const pkmRoute = require('./routes/pkm.route');
+const zonRoute = require('./routes/zon.route');
+const staffRoute = require('./routes/staff.route');
+const staffPremisRoute = require('./routes/staffpremis.route');
+
 
 const { httpLogStream } = require('./utils/logger');
 
@@ -20,6 +25,11 @@ app.use(cors());
 //app.use('/api/user', userRoute);
 app.use('/api/master_premis', master_premisRoute);
 app.use('/api/rkp_ent', rkp_entRoute);
+app.use('/api/pkm', pkmRoute);
+app.use('/api/zon', zonRoute);
+app.use('/api/staff', staffRoute);
+app.use('/api/staff_premis', staffPremisRoute);
+
 
 app.get('/', (req, res) => {
     res.status(200).send({

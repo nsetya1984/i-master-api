@@ -2,16 +2,16 @@ const db = require('../models/index.js')
 module.exports = {
 
   create: (req, res) => {
-    console.log("=RKP ENT =create==");
+    console.log("=Staffpremispremis =create==");
     console.log(req.body);
-    db.Rkp_ent.insertOne(req.body, result => {
+    db.Staffpremis.insertOne(req.body, result => {
       res.json({ id: result.insertId })
     })
 
   },
 
   getAll: (req, res) => {
-    db.Rkp_ent.selectAll(data => {
+    db.Staffpremis.selectAll(data => {
       res.json(data)
     })
   },
@@ -51,7 +51,7 @@ module.exports = {
     console.log(condition);
     console.log(limit);
     
-    db.Rkp_ent.selectSome(condition,limit, data => {
+    db.Staffpremis.selectSome(condition,limit, data => {
       res.json(data)
     });
 
@@ -59,31 +59,26 @@ module.exports = {
   getTotal: (req, res) => {
     console.log("==getTotal==");
     console.log(req.params);
-    db.Rkp_ent.getTotal(data => {
+    db.Staffpremis.getTotal(data => {
       res.json(data)
     })
   },
 
+
   createNew: (req, res) => {
-    db.Rkp_ent.insertOne(req.body.vals, result => {
+    db.Staffpremis.insertOne(req.body.vals, result => {
       res.json({ id: result.insertId })
     })
   },
-  login: (req, res) => {
-    console.log("req.body",req.body);
-    db.Rkp_ent.login(req.body, data => {
-      res.json(data)
-    });
-  },
-
+  
   getById: (req, res) => {
     console.log("==getById==");
-    db.Rkp_ent.selectOne(req.params.id, data => {
+    db.Staffpremis.selectOne(req.params.id, data => {
       res.json(data)
     })
   },
   updateById: (req, res) => {
-    db.Rkp_ent.updateOne(req.body, req.params.id, result => {
+    db.Staffpremis.updateOne(req.body, req.params.id, result => {
     
     })
   },
@@ -93,7 +88,7 @@ module.exports = {
     var filters=JSON.parse(req.query.filter);
    
     
-    var condition=" WHERE id IN (";
+    var condition=" WHERE id_staff IN (";
     var strCondition="";
     Object.entries(filters).forEach(([key, value]) => {  
           strCondition=strCondition + `${value}, `
@@ -101,12 +96,12 @@ module.exports = {
     condition = condition+strCondition.substring(0, strCondition.length - 2)+")";
     console.log(condition);
 
-    db.Rkp_ent.deleteSome(condition, data => {
+    db.Staffpremis.deleteSome(condition, data => {
       res.json(data)
     })
   },
   deleteById: (req, res) => {
-    db.Rkp_ent.deleteOne(req.params.id, data => {
+    db.Staffpremis.deleteOne(req.params.id, data => {
       res.json(data)
     })
   }

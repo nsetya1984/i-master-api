@@ -1,17 +1,17 @@
 const connection = require('../config/db.config');
 
-const rkp_ent = {
+const Staff = {
   selectAll: cb => {
     const queryString =
-      "SELECT * FROM rkp_ent WHERE 1 LIMIT 50";
+      "SELECT * FROM master_data_staff_premis WHERE 1 LIMIT 50";
     connection.query(queryString, (err, results) => {
       if (err) throw err;
       cb(results);
     });
   },
   selectSome: (condition,range,cb) => {
-    console.log("MODEL: rkp_ent->selectSome");
-    const queryString ="SELECT * , Id as id FROM `rkp_ent` WHERE 1 "+condition+" ORDER BY id DESC "+range+" ";
+    console.log("MODEL: Staff master_data_staff_premis->selectSome");
+    const queryString ="SELECT a.*,b.*, c.*, a.id_staff as id FROM `master_data_staff_premis` a  LEFT JOIN  master_data_staff c  ON a.id_staff=c.id_number  LEFT JOIN master_data_jawatan b ON a.id_jawatan=b.id WHERE 1 "+condition+"  "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -21,7 +21,7 @@ const rkp_ent = {
 
   selectOne: (id, cb) => {
     const queryString =
-      "SELECT * FROM rkp_ent WHERE Id=?;";
+      "SELECT a.*,c.* FROM `master_data_staff_premis` a  LEFT JOIN master_data_staff c  ON a.id_staff=c.id_number WHERE a.id=?;";
     connection.query(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result[0]);
@@ -30,7 +30,7 @@ const rkp_ent = {
 
 
   getTotal: (cb) => {
-    const queryString ="SELECT count(*) as total FROM rkp_ent";
+    const queryString ="SELECT count(*) as total FROM master_data_staff_premis";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -38,8 +38,9 @@ const rkp_ent = {
     });
   },
 
+ 
   deleteOne: (id, cb) => {
-    const queryString = "DELETE FROM rkp_ent WHERE id=?;";
+    const queryString = "DELETE FROM master_data_staff_premis WHERE id_staff=?;";
     connection.execute(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result);
@@ -47,8 +48,8 @@ const rkp_ent = {
   },
 
  deleteSome: (condition,cb) => {
-    console.log("MODEL: rkp_ent->deleteSome");
-    const queryString ="DELETE FROM rkp_ent  "+condition+" ";
+    console.log("MODEL: master_data_staff_premis->deleteSome");
+    const queryString ="DELETE FROM master_data_staff_premis  "+condition+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;
@@ -57,10 +58,10 @@ const rkp_ent = {
   },
 
   insertOne: (vals, cb) => {
-    console.log("MODEL: rkp_ent->insertOne");
+    console.log("MODEL: master_data_staff_premis->insertOne");
     console.log(vals);
     const queryString =
-    "INSERT INTO rkp_ent SET ?";
+    "INSERT INTO master_data_staff_premis SET ?";
     console.log(queryString);
     connection.query(queryString, vals,(err, results) => {
       if (err) throw err;
@@ -69,10 +70,9 @@ const rkp_ent = {
   },
   
    updateOne: (vals, id, cb) => {
-    console.log("MODERL rkp_ent updateOne");
-    console.log(vals);
+    console.log("MODERL master_data_staff_premis updateOne");
     const queryString =
-      "UPDATE rkp_ent SET ? WHERE id=?";
+      "UPDATE master_data_staff_premis SET ? WHERE id_staff=?";
     console.log(queryString);
 
     console.log("Result :");
@@ -84,4 +84,4 @@ const rkp_ent = {
   }
 };
 
-module.exports = rkp_ent;
+module.exports = Staff;
