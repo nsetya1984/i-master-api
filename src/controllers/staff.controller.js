@@ -25,9 +25,9 @@ module.exports = {
     var limit=" LIMIT 100";
  
     Object.entries(filters).forEach(([key, value]) => {  
-      if(key==='id_zon')
-        strCondition=strCondition+" a."+` ${key} = '${value}' AND `
-      if(key==='q')
+      if(key==='id')
+        strCondition=strCondition+" a."+`id_number= '${value}' AND `
+      else if(key==='q')
         strCondition=strCondition+" a.nama_lengkap"+` LIKE '%${value}%' AND `
       else
         strCondition=strCondition+` ${key} LIKE '%${value}%' AND `

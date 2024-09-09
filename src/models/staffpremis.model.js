@@ -11,7 +11,7 @@ const Staff = {
   },
   selectSome: (condition,range,cb) => {
     console.log("MODEL: Staff master_data_staff_premis->selectSome");
-    const queryString ="SELECT a.*,b.*, c.*, a.id_staff as id FROM `master_data_staff_premis` a  LEFT JOIN  master_data_staff c  ON a.id_staff=c.id_number  LEFT JOIN master_data_jawatan b ON a.id_jawatan=b.id WHERE 1 "+condition+"  "+range+" ";
+    const queryString ="SELECT b.*, c.*,a.*, a.id_staff as id FROM `master_data_staff_premis` a  LEFT JOIN  master_data_staff c  ON a.id_staff=c.id_number  LEFT JOIN master_data_jawatan b ON a.id_jawatan=b.id WHERE 1 "+condition+"  "+range+" ";
     console.log(queryString);
     connection.query(queryString, (err, results) => {
       if (err) throw err;

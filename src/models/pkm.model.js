@@ -1,4 +1,5 @@
 const connection = require('../config/db.config');
+const { formatDate } = require('../utils/general');
 
 const Pkm = {
   selectAll: cb => {
@@ -21,7 +22,7 @@ const Pkm = {
 
   selectOne: (id, cb) => {
     const queryString =
-      "SELECT b.*,a.*,c.zon_name FROM `master_data_premis`a LEFT JOIN master_project_category b ON a.id_category=b.category_id LEFT JOIN zons c  ON a.id_zon=c.id_zon WHERE a.id=?;";
+      "SELECT a.* FROM `master_data_premis` a WHERE a.id=?;";
     connection.query(queryString, [id], (err, result) => {
       if (err) throw err;
       cb(result[0]);
@@ -87,8 +88,10 @@ const Pkm = {
     });
   },
   
-   updateOne: (vals, id, cb) => {
+  updateOne: (vals, id, cb) => {
     console.log("MODERL master_data_premis updateOne");
+    vals.tarikh_daftar=formatDate(vals.tarikh_daftar);
+    
     const queryString =
       "UPDATE master_data_premis SET ? WHERE id=?";
     console.log(queryString);
