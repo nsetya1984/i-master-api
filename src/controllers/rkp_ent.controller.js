@@ -76,6 +76,19 @@ module.exports = {
     });
   },
 
+  getTotalFilter: (req, res) => {
+    console.log("getTotalFilter");
+    console.log(req.query);
+
+    let keys = Object.keys(req.query);
+    let values = Object.values(req.query);
+
+    db.Rkp_ent.getTotalFilter(keys[0],values[0],data => {
+      res.json(data)
+    })
+  },
+
+
   getById: (req, res) => {
     console.log("==getById==");
     db.Rkp_ent.selectOne(req.params.id, data => {

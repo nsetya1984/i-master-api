@@ -29,6 +29,20 @@ const rkp_ent = {
   },
 
 
+  getTotalFilter: (key,value,cb) => {
+    if(key && value)
+      var queryString ="SELECT count(*) as total FROM rkp_ent a LEFT JOIN  master_data_premis  b ON a.premis_id=b.id WHERE b.jenis_premis=2  AND a."+key+"="+value;
+    else
+      var queryString ="SELECT count(*) as total FROM rkp_ent a LEFT JOIN  master_data_premis  b ON a.premis_id=b.id WHERE b.jenis_premis=2";
+
+    console.log(queryString)
+    connection.query(queryString, (err, result) => {
+      if (err) throw err;
+      cb(result[0]);
+    });
+  },
+
+
   getTotal: (cb) => {
     const queryString ="SELECT count(*) as total FROM rkp_ent";
     console.log(queryString)

@@ -65,10 +65,11 @@ module.exports = {
   },
 
   getTotalFilter: (req, res) => {
-    console.log("==getTotalFilter==");
-    console.log(req.params);
-    let keys = Object.keys(req.params);
-    let values = Object.values(req.params);
+    console.log("getTotalFilter");
+    console.log(req.query);
+
+    let keys = Object.keys(req.query);
+    let values = Object.values(req.query);
 
     db.Pkm.getTotalFilter(keys[0],values[0],data => {
       res.json(data)

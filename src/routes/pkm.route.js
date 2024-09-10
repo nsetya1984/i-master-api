@@ -25,7 +25,7 @@ router
   .route('/gettotalbycategori')
   .get(pkmController.getTotalByCategori)
 router
-  .route('/kategori/:kategori_id/gettotal')
+  .route('/gettotalfilter')
   .get(pkmController.getTotalFilter)
 router
   .route('/:id')

@@ -20,6 +20,9 @@ router
   .route('/gettotal')
   .get(rkp_entController.getTotal)
 router
+  .route('/gettotalfilter')
+  .get(rkp_entController.getTotalFilter)
+router
   .route('/:id')
   .get(rkp_entController.getById)
 module.exports = router

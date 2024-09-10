@@ -31,7 +31,7 @@ const Pkm = {
 
 
   getTotal: (cb) => {
-    const queryString ="SELECT count(*) as total FROM master_data_premis";
+    const queryString ="SELECT count(*) as total FROM master_data_premis WHERE jenis_premis=2";
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
@@ -40,7 +40,11 @@ const Pkm = {
   },
 
    getTotalFilter: (key,value,cb) => {
-    const queryString ="SELECT count(*) as total FROM master_premis WHERE "+key+"="+value;
+    if(key && value)
+      var queryString ="SELECT count(*) as total FROM master_data_premis WHERE jenis_premis=2 AND "+key+"="+value;
+    else
+      var queryString ="SELECT count(*) as total FROM master_data_premis WHERE jenis_premis=2";
+
     console.log(queryString)
     connection.query(queryString, (err, result) => {
       if (err) throw err;
